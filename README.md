@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
 </p>
 
-<h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
+<h1>On-premises Active Directory deployed in the Cloud (Azure)</h1>
 This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines.<br />
 
 <h2>Environments and Technologies Used</h2>
@@ -162,7 +162,7 @@ Once DC-1 has restarted, open up Server Manager, click "Tools" in the upper righ
 <img src="https://i.imgur.com/8Byqn45.png" height="80%" width="80%" alt="22"/>
 </p>
 
-In Active Directory Users and Computers, right click the domain (mydomain.com), go to "New" and "Organizational Unit." Create two organizational units for administrators (_ADMINS) and employees (_EMPLOYEES). Once done, right click mydomain.com and click referesh to sort the new organizational units to the top. 
+In Active Directory Users and Computers, right click the domain (mydomain.com), go to "New" and "Organizational Unit." Create two organizational units for administrators (_ ADMINS) and employees (_ EMPLOYEES). Once done, right click mydomain.com and click referesh to sort the new organizational units to the top. 
 
 <p>
 <img src="https://i.imgur.com/RtW3ahG.png" height="80%" width="80%" alt="23"/>
@@ -180,7 +180,7 @@ In Active Directory Users and Computers, right click the domain (mydomain.com), 
 <img src="https://i.imgur.com/CiknW69.png" height="80%" width="80%" alt="26"/>
 </p>
 
-Click on the _ADMINS organizational unit and right click into the right window pane. Go to "New" and click "User." Fill in the boxes to create a new user. In this example, "Jane Doe" was used and the login name is "jane_admin."
+Click on the _ ADMINS organizational unit and right click into the right window pane. Go to "New" and click "User." Fill in the boxes to create a new user. In this example, "Jane Doe" was used and the login name is "jane_admin."
 
 <p>
 <img src="https://i.imgur.com/7OonWQN.png" height="80%" width="80%" alt="27"/>
@@ -220,7 +220,7 @@ Fifth step is to join Client-1 to DC-1.
 To do this, go back to the Azure Portal. Go to the Client-1 virtual machine and click on the "Networking" section in underneath "Settings" on the left hand side. 
 
 <p>
-<img src="https://i.imgur.com/jwMFN" height="80%" width="80%" alt="34"/>
+<img src="https://i.imgur.com/jwMFN40.png" height="80%" width="80%" alt="34"/>
 </p>
 
 From there, click on "DNS Servers." Then click, "Custom." Type in DC-1's private IP address (10.0.0.4). 
@@ -235,33 +235,88 @@ From there, click on "DNS Servers." Then click, "Custom." Type in DC-1's private
 
 Restart Client-1 and log back in. Once logged in, right click the Start menu and click on "System."
 
+<p>
 <img src="https://i.imgur.com/xkU5A1U.png" height="80%" width="80%" alt="37"/>
 </p>
 
 On the right hand side, click "Rename this PC (advanced)." Then click the "Change..." button and type in the domain name (mydomain.com). 
 
+<p>
 <img src="https://i.imgur.com/Icy1PH1.png" height="80%" width="80%" alt="38"/>
 </p>
 
 Open up the Command line and type the command "ipconfig /displaydns." This will show all the Fully Qualified Domain Names associated to Client-1. It will show that the DNS Servers are associated to DC-1's private IP address. 
 
+<p>
 <img src="https://i.imgur.com/ozaaPMB.png" height="80%" width="80%" alt="39"/>
 </p>
 
 <h3>Step 6: Setup Remote Desktop for non-administrative users to Client</h3>
 Sixth step is to setup Remote Desktop for non-administrative users to Client-1. To do this, log into Client-1. This time, log in using the domain name and the admin account (mydomain.com\jane_admin).
 
+<p>
 <img src="https://i.imgur.com/33LPGMy.png" height="80%" width="80%" alt="40"/>
 </p>
 
-Once logged in, right click the Start menu and click "System." Then click "Remote desktop" on the right side. 
+Once logged in, right click the Start menu and click "System." Then click "Remote desktop" on the right side. From there, click "Add..." and type in "Domain Users." Click "Check Names" and click "OK" to exit out. 
 
+<p>
 <img src="https://i.imgur.com/f2nqqY3.png" height="80%" width="80%" alt="41"/>
 </p>
 
+<p>
+<img src="https://i.imgur.com/GNZgZQw.png" height="80%" width="80%" alt="42"/>
+</p>
 
+<p>
+<img src="https://i.imgur.com/250dtjg.png" height="80%" width="80%" alt="43"/>
+</p>
 
+<h3>Step 7: Create users in Active Directory using Powershell script</h3>
+Seventh and final step is to use Powershell to create users. A script was created by Josh Madakor that creates 10,000 users with the password "Password1."
 
+The script can be found [here](https://github.com/joshmadakor1/AD_PS/blob/master/1_CREATE_USERS.ps1)
 
+Go back into DC-1 and open Windows Powershell from the start menu. Right click it and "Run as administrator."
 
+<p>
+<img src="https://i.imgur.com/GM8VLuY.png" height="80%" width="80%" alt="44"/>
+</p>
 
+<p>
+<img src="https://i.imgur.com/oLTbGLc.png" height="80%" width="80%" alt="45"/>
+</p>
+
+Copy and paste the script into a new Powershell console. I modified the script to only create 10 users so it is easier to manage and play around with. 
+
+<p>
+<img src="https://i.imgur.com/2Yot0nU.png" height="80%" width="80%" alt="46"/>
+</p>
+
+Once the users have been created, go back to Active Directory Users and Computers. All the users that were created were placed into the _ EMPLOYEES organizational unit. Choose one user (fihapi.nile) and log into Client-1 with the user. Remember the password is Password1. 
+
+<p>
+<img src="https://i.imgur.com/QzRho2A.png" height="80%" width="80%" alt="47"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/DgfxJtj.png" height="80%" width="80%" alt="48"/>
+</p>
+
+<h3>Bonus Step: How to unlock users' accounts and reset passwords</h3>
+In order to unlock a user's account, right click the user account and click "Properties." 
+Click on "Unlock Account." You can also right click the user account and "Reset Password..."
+
+<p>
+<img src="https://i.imgur.com/HTcYBBU.png" height="80%" width="80%" alt="49"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/lNfDusu.png" height="80%" width="80%" alt="50"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/HrMlyi7.png" height="80%" width="80%" alt="51"/>
+</p>
+
+Thank you for checking out my Active Directory tutorial!
