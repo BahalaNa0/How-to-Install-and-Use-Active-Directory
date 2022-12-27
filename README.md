@@ -79,7 +79,7 @@ Click the "Assignment" button to switch it from dynamic to static.
 
 <h3>Step 2: Establish connectivity to between Domain Controller and Client</h3>
 Second step is establish connectivity between Client-1 and DC-1. Use Microsoft Remote Desktop to connect to both virtual machines. 
-
+<br>
 Open Client-1 and open the Command line. Type in the command "ping -t" + the private IP address of DC-1. In this case, it is 10.0.0.4. The "ping -t" command will continously ping DC-1. 
 
 <p>
@@ -222,6 +222,8 @@ Log out of DC-1 as "labuser" and log back in as the administrator account that w
 
 <h3>Step 5: Join Client to the Domain Controller </h3>
 Fifth step is to join Client-1 to DC-1. 
+
+<br>
 
 To do this, go back to the Azure Portal. Go to the Client-1 virtual machine and click on the "Networking" section in underneath "Settings" on the left hand side. 
 
