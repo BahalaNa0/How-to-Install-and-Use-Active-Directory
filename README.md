@@ -283,7 +283,9 @@ Once logged in, right click the Start menu and click "System." Then click "Remot
 <h3>Step 7: Create users in Active Directory using Powershell script</h3>
 Seventh and final step is to use Powershell to create users. A script was created by Josh Madakor that creates 10,000 users with the password "Password1."
 
-The script can be found [here](https://github.com/joshmadakor1/AD_PS/blob/master/1_CREATE_USERS.ps1)
+<p></p>
+
+The script can be found [here](https://github.com/joshmadakor1/AD_PS/blob/master/1_CREATE_USERS.ps1).
 
 Go back into DC-1 and open Windows Powershell from the start menu. Right click it and "Run as administrator."
 
@@ -327,4 +329,8 @@ Click on "Unlock Account." You can also right click the user account and "Reset 
 <img src="https://i.imgur.com/HrMlyi7.png" height="80%" width="80%" alt="51"/>
 </p>
 
-Thank you for checking out my Active Directory tutorial!
+Thank you for checking out my Active Directory tutorial! I hope you were able to learn and build some intuition on how to use Active Directory. I would suggest doing this exercise several times in order to build the knowledge and skills in Active Directory. Especially if you are trying to shoot for an IT job, where Active Directory is used heavily. 
+
+<p></p>
+
+Don't forget to clean up your Azure resource groups as you can incur charges!
