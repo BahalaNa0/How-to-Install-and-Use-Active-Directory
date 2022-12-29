@@ -19,19 +19,13 @@ Active Directory is a product by Microsoft that is for domain network services. 
 
 <h2>Configuration Steps</h2>
 
-Step 1: Create resources
-
-Step 2: Establish connectivity to between Domain Controller and Client
-
-Step 3: Install Active Directory
-
-Step 4: Create an administrator and regular account in Active Directory
-
-Step 5: Join Client to the Domain Controller 
-
-Step 6: Setup Remote Desktop for non-administrative users to Client
-
-Step 7: Create users in Active Directory using Powershell script
+- Step 1: Create resources
+- Step 2: Establish connectivity to between Domain Controller and Client
+- Step 3: Install Active Directory
+- Step 4: Create an administrator and regular account in Active Directory
+- Step 5: Join Client to the Domain Controller 
+- Step 6: Setup Remote Desktop for non-administrative users to Client
+- Step 7: Create users in Active Directory using Powershell script
 
 <h3>Step 1: Create resources</h3>
 
