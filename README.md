@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
 </p>
 
-<h1>On-premises Active Directory deployed in the Cloud (Azure)</h1>
+<h1>How to Install and Use Active Directory</h1>
 Active Directory is a product by Microsoft that is for domain network services. It is native to Windows Server and is a common tool used in Information Technology today. There is an on premises version and an Azure version. In this tutorial, Active Directory was installed on a virtual machine within Azure.  <br />
 
 <h2>Environments and Technologies Used</h2>
