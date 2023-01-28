@@ -275,11 +275,44 @@ Once logged in, right click the Start menu and click "System." Then click "Remot
 </p>
 
 <h3>Step 7: Create users in Active Directory using Powershell script</h3>
-Seventh and final step is to use Powershell to create users. A script was created by Josh Madakor that creates 10,000 users with the password "Password1."
+Seventh and final step is to use Powershell to create users. 
 
 <p></p>
 
-The script can be found [here](https://github.com/joshmadakor1/AD_PS/blob/master/1_CREATE_USERS.ps1).
+The script was created by [Josh Madakor](https://github.com/joshmadakor1). Click [here](https://github.com/joshmadakor1/AD_PS/blob/master/1_CREATE_USERS.ps1) for the source code.
+
+
+The script below creates 10,000 users with the password "Password1."
+
+<p></p>
+
+
+```
+# ----- Edit these Variables for your own Use Case ----- #
+$PASSWORD_FOR_USERS   = "Password1"
+$USER_FIRST_LAST_LIST = Get-Content .\names.txt
+# ------------------------------------------------------ #
+
+$password = ConvertTo-SecureString $PASSWORD_FOR_USERS -AsPlainText -Force
+New-ADOrganizationalUnit -Name _USERS -ProtectedFromAccidentalDeletion $false
+
+foreach ($n in $USER_FIRST_LAST_LIST) {
+    $first = $n.Split(" ")[0].ToLower()
+    $last = $n.Split(" ")[1].ToLower()
+    $username = "$($first.Substring(0,1))$($last)".ToLower()
+    Write-Host "Creating user: $($username)" -BackgroundColor Black -ForegroundColor Cyan
+    
+    New-AdUser -AccountPassword $password `
+               -GivenName $first `
+               -Surname $last `
+               -DisplayName $username `
+               -Name $username `
+               -EmployeeID $username `
+               -PasswordNeverExpires $true `
+               -Path "ou=_USERS,$(([ADSI]`"").distinguishedName)" `
+               -Enabled $true
+}
+```
 
 Go back into DC-1 and open Windows Powershell from the start menu. Right click it and "Run as administrator."
 
@@ -327,4 +360,4 @@ Thank you for checking out my Active Directory tutorial! I hope you were able to
 
 <p></p>
 
-Don't forget to clean up your Azure resource groups as you can incur charges!
+**REMEMBER TO DELETE YOUR RESOURCES ONCE YOU ARE DONE WITH THE LAB!**
